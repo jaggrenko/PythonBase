@@ -6,7 +6,7 @@ while True:
         current_int = int(user_current)
         target_int = int(user_target)
 
-        if target_int < current_int or target_int == current_int:
+        if target_int <= current_int:
             print('Мы должны улучшить результат!')
             continue
         else:

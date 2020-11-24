@@ -1,13 +1,25 @@
 list_len = input('Уважаемый пользователь, введите необходимую длину списка: ')
 list_val = []
-list_res = []
+result = []
 
 if list_len.isdigit():
+    # в цикле заполняем список
     while len(list_val) < int(list_len):
         list_val.append(input('Введите значение: '))
     else:
         print(f'Исходный список: {list_val}')
+        
+    # вариант_1 (непитоничный)_ PyDzen: простое лучше сложного 
+    #list_res = list(zip(list(filter(lambda x: list_val.index(x) % 2, list_val)),
+    #                    list(filter(lambda x: not list_val.index(x) % 2, list_val))))
+    #[[result.append(i) for i in ii] for ii in list_res] #[[expression for y in x] for x in iterator]
 
-    list_res = list(zip(list(filter(lambda x: list_val.index(x) % 2, list_val)),
-                        list(filter(lambda x: not list_val.index(x) % 2, list_val))))
-    print(list_res) if not int(list_len) % 2 else print(list_res.append(list_val[len(list_val)]))
+    # вариант_2 (питоничный)
+    for index in range(0, len(list_val)-1, 2):
+        list_val[index], list_val[index + 1] = list_val[index + 1], list_val[index]
+        result.extend(list_val[index:index+2])
+
+    if int(list_len) & 1: # проверка на нечетность
+        result.append(list_val[-1])
+
+    print(f'Конечный список: {result}')

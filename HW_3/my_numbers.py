@@ -31,7 +31,7 @@ base as float, degree as negative number
 
 
 def negative_degree_easy_mode(base, degree):
-    return base ** degree
+    return 1/(base ** degree)
 
 
 """

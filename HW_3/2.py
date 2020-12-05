@@ -3,6 +3,7 @@ from my_email import is_email
 
 INPUT_REQ = 'Уважаемый пользователь,\nвведите следующие данные:'
 ERROR_MSG = 'Вы ввели неверное значение!'
+INFO_MSG = 'Для выхода из программы введите *'
 
 person_dict = {'имя': [],               # 0001
                'фамилия': [],           # 0010
@@ -15,7 +16,7 @@ person_dict = {'имя': [],               # 0001
 goods_struct = []
 user_exit = False
 
-print('Для выхода из программы введите *')
+print(INFO_MSG)
 
 while not user_exit:
     print(INPUT_REQ)

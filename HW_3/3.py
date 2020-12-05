@@ -7,10 +7,10 @@ ERROR_MSG = 'Вы ввели число в неверном формате!'
 def my_func(arg_1, arg_2, arg_3):
     lst = [arg_1, arg_2, arg_3]
     if len(set(lst)) <= 1:
-        return 'Все элементы равны!'
+        return False, 'Все элементы равны!'
     else:
         lst.remove(min(lst))
-        return sum(lst)
+        return True, sum(lst)
 
 
 flag_exit = False
@@ -25,6 +25,7 @@ while not flag_exit:
             print(ERROR_MSG)
             break
     else:
-        flag_exit = True
-else:
-    print(my_func(tmp_lst[0], tmp_lst[1], tmp_lst[2]))
+        status, val = my_func(tmp_lst[0], tmp_lst[1], tmp_lst[2])
+        if status:
+            flag_exit = True
+        print(val)

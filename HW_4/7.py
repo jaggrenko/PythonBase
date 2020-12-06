@@ -1,5 +1,5 @@
-def fact_n(n):
-    for i in range(1, n + 1):
+def fact_n(num):
+    for i in range(1, num + 1):
         yield i
 
 

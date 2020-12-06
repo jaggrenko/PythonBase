@@ -18,7 +18,7 @@ tmp_lst = [1, 2, 'u', 3, '*']
 counter = 0
 
 for el in cycle(tmp_lst):
-    if counter >= exit_cycle_num*len(tmp_lst):
+    if counter >= exit_cycle_num*len(tmp_lst):  # домножаем на длину списка
         break
     print(el)
     counter += 1

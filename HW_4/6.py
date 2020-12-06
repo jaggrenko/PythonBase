@@ -15,7 +15,7 @@ exit_cycle_num = 10
 [print(val) for val in gen_nums_sequence(start_gen_num, exit_cycle_num)]
 
 
-tmp_lst = [1, 2, 'u', 3, '*']
+tmp_lst = [1, 2, 'u', 3, '*', 'lambda not lambada']
 counter = 0
 
 for el in cycle(tmp_lst):

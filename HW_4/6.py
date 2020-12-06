@@ -8,6 +8,7 @@ def gen_nums_sequence(start_num=0, end_num=0):
         else:
             yield el
 
+
 start_gen_num = 3
 exit_cycle_num = 10
 

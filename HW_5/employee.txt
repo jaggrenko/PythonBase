@@ -1,0 +1,5 @@
+Ivanov 10000
+Sidorov 50000
+Guido 200000
+Bobchinskiy 60000
+Bilbo 12000

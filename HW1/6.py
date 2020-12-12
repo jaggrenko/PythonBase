@@ -1,6 +1,6 @@
 while True:
-    user_current = input('Уважаемый пользователь, введите текущий результат спортсмена:')
-    user_target = input('Уважаемый пользователь, введите желаемый результат спортсмена:')
+    user_current = input('Уважаемый пользователь, введите текущий результат спортсмена: ')
+    user_target = input('Уважаемый пользователь, введите желаемый результат спортсмена: ')
 
     if user_current.isdigit() and user_target.isdigit():
         current_int = int(user_current)

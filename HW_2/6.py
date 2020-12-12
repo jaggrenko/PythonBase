@@ -32,7 +32,7 @@ while not user_exit:
         [analyze_lst[key].append(tmp_dict[key]) for key in analyze_lst.keys()]
 else:
     print(*goods_struct, sep=',\n', end='\n\n]\n\n{\n')
-    #print(*analyze_lst.items(), sep=',\n', end='\n\n}') # питонично :)
+    #print(*analyze_lst.items(), sep=',\n', end='\n\n}') # питонично
     for i, key in enumerate(analyze_lst, 1): # <-- еще одна жертва ТЗ
         [print(f'"{key}": {analyze_lst[key]},', end='\n') if i < len(analyze_lst)
          else print(f'"{key}": {analyze_lst[key]}', end='\n\n}')]

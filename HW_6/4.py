@@ -12,8 +12,11 @@ class Car:
     def stop(self):
         return f'{self.name} остановилась'
 
-    def __str__(self):
-        return f'{self.name} повернула {self.direction}'
+    def car_direction(self):
+        if self.direction == 'прямо':
+            return f'{self.name} поехала {self.direction}'
+        else:
+            return f'{self.name} повернула {self.direction}'
 
     def show_speed(self):
         return f'текущая скорость: {self.speed}'
@@ -30,9 +33,6 @@ class TownCar(Car):
         super().__init__(speed, color, name, direction)
         self._speed_lim = speed_limit
 
-    def __enter__(self):
-        return self
-
     def show_speed(self):
         if self.speed > self._speed_lim:
             return f'превышение скорости {self.name} на {self.speed - self._speed_lim} км/ч!'
@@ -47,13 +47,21 @@ class WorkCar(Car):
 
     def show_speed(self):
         if self.speed > self._speed_lim:
-            return f'Превышение скорости {self.name}на {self.speed - self._speed_lim} км/ч!'
+            return f'Превышение скорости {self.name} на {self.speed - self._speed_lim} км/ч!'
         else:
             return f'Текущая скорость {self.name}: {self.speed} км/ч'
 
 
 class SportCar(Car):
-    pass
+    def __init__(self, speed_limit, speed, color, name, direction):
+        super().__init__(speed, color, name, direction)
+        self._speed_lim = speed_limit
+
+    def show_speed(self):
+        if self.speed > self._speed_lim:
+            return f'Превышение скорости {self.name} на {self.speed - self._speed_lim} км/ч!'
+        else:
+            return f'Текущая скорость {self.name}: {self.speed} км/ч'
 
 
 class PoliceCar(Car):
@@ -62,10 +70,16 @@ class PoliceCar(Car):
 
 car_0 = TownCar(60, 70, 'black', 'trabant', 'налево')
 print(f'марка: {car_0.name}\nцвет: {car_0.color}\n'
-      f'направление: {car_0.direction}\n{car_0.is_police_car()}\n{car_0.show_speed()}\n')
-# with car_0 as class_ex:
-#     print(class_ex.name, class_ex.direction)
+      f'направление: {car_0.car_direction()}\n{car_0.is_police_car()}\n{car_0.show_speed()}\n')
 
 car_1 = TownCar(40, 35, 'grey', 'volvo', 'направо')
 print(f'марка: {car_1.name}\nцвет: {car_1.color}\n'
-      f'направление: {car_1.direction}\n{car_1.is_police_car()}\n{car_1.show_speed()}\n')
+      f'направление: {car_1.car_direction()}\n{car_1.is_police_car()}\n{car_1.show_speed()}\n')
+
+car_2 = SportCar(120, 100, 'red', 'maseratti', 'прямо')
+print(f'марка: {car_2.name}\nцвет: {car_2.color}\n'
+      f'направление: {car_2.car_direction()}\n{car_2.is_police_car()}\n{car_2.show_speed()}\n')
+
+car_3 = PoliceCar(150, 'grey', 'UAZ', 'прямо', True)
+print(f'марка: {car_3.name}\nцвет: {car_3.color}\n'
+      f'направление: {car_3.car_direction()}\n{car_3.is_police_car()}\n{car_3.show_speed()}\n')

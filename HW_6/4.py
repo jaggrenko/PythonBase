@@ -7,25 +7,29 @@ class Car:
         self.is_police = is_police
 
     def go(self):
-        return f'{self.name} поехала'
+        return f'{self.name} поехал(а)'
 
     def stop(self):
-        return f'{self.name} остановилась'
+        return f'{self.name} ...сделал(а) стоп'
 
     def car_direction(self):
         if self.direction == 'прямо':
-            return f'{self.name} поехала {self.direction}'
+            return f'{self.name} поехал(а) {self.direction}'
         else:
-            return f'{self.name} повернула {self.direction}'
+            return f'{self.name} повернул(а) {self.direction}'
 
     def show_speed(self):
         return f'текущая скорость: {self.speed}'
 
     def is_police_car(self):
         if self.is_police:
-            return f'тип автомобиля: полицейский'
+            return f'полицейский'
         else:
-            return f'тип автомобиля: гражданский'
+            return f'гражданский'
+
+    def __str__(self):
+        return f'марка: {self.name}\nцвет: {self.color}\nтип автомобиля: {self.is_police_car()}\n' \
+               f'направление: {self.car_direction()}\n{self.show_speed()}\n{self.stop()}\n'
 
 
 class TownCar(Car):
@@ -69,17 +73,13 @@ class PoliceCar(Car):
 
 
 car_0 = TownCar(60, 70, 'black', 'trabant', 'налево')
-print(f'марка: {car_0.name}\nцвет: {car_0.color}\n'
-      f'направление: {car_0.car_direction()}\n{car_0.is_police_car()}\n{car_0.show_speed()}\n')
+print(car_0)
 
 car_1 = TownCar(40, 35, 'grey', 'volvo', 'направо')
-print(f'марка: {car_1.name}\nцвет: {car_1.color}\n'
-      f'направление: {car_1.car_direction()}\n{car_1.is_police_car()}\n{car_1.show_speed()}\n')
+print(car_1)
 
 car_2 = SportCar(120, 100, 'red', 'maseratti', 'прямо')
-print(f'марка: {car_2.name}\nцвет: {car_2.color}\n'
-      f'направление: {car_2.car_direction()}\n{car_2.is_police_car()}\n{car_2.show_speed()}\n')
+print(car_2)
 
 car_3 = PoliceCar(150, 'grey', 'UAZ', 'прямо', True)
-print(f'марка: {car_3.name}\nцвет: {car_3.color}\n'
-      f'направление: {car_3.car_direction()}\n{car_3.is_police_car()}\n{car_3.show_speed()}\n')
+print(car_3)

@@ -13,24 +13,18 @@ class TrafficLight:
         print(f'Сейчас горит {key}.\n'
               f'До смены сигнала --> {__next_color} {val} сек.')
 
-    def __ticks(self):
-        sleep(1)
-
-    def __flag_switch(self):
-        self.__reversed = not self.__reversed
-
     def __driver(self, iter_2_layers):
         for item in iter_2_layers:
             for key, val in item.items():
                 while val > 1:
                     val -= 1
                     self.__process_msg(key, val)
-                    self.__ticks()
+                    sleep(1)
 
     def running(self):
         for _ in range(self._cycles_cnt):
             self.__driver(self.__color_timing[1::-1]) if self.__reversed else self.__driver(self.__color_timing)
-            self.__flag_switch()
+            self.__reversed = not self.__reversed
 
 
 trl = TrafficLight(2)

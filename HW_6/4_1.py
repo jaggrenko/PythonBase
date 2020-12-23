@@ -39,10 +39,6 @@ class PoliceCar(Car):
     def show_speed(self):
         return f'текущая скорость {self.name}: {self.speed} км/ч'
 
-    def __str__(self):
-        return f'марка: {self.name}\nцвет: {self.color}\nтип автомобиля: {self.car_type()}\n' \
-               f'направление: {self.car_direction()}\n{self.show_speed()}\n{self.stop()}\n'
-
 
 class TownCar(Car):
     pass

@@ -13,12 +13,12 @@ class Pen(Stationary):
 
 class Pensil(Stationary):
     def draw(self):
-        return f'__переопределение метода {self.draw}; {self.title}: запуск отрисовки...'
+        return f'__переопределение метода {self.draw}* {self.title}: запуск отрисовки...'
 
 
 class Handle(Stationary):
     def draw(self):
-        return f'__переопределение метода {self.draw}; {self.title}: запуск отрисовки...'
+        return f'__переопределение метода {self.draw}! {self.title}: запуск отрисовки...'
 
 
 pen = Pen('ручка')
@@ -29,4 +29,3 @@ print(pensil.draw())
 
 handle = Handle('маркер')
 print(handle.draw())
-

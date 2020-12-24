@@ -43,7 +43,7 @@ class Coat(Clothes):
 
 
 try:
-    suit = Suit(0)
+    suit = Suit(5)
     coat = Coat(1)
     print(f'Расход материала на {suit.name} и {coat.name}: {"{:.2f}".format(suit.calc() + coat.calc())}')
 except TypeError:

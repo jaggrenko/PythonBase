@@ -1,3 +1,4 @@
+# искусственный код, не более (см. 3_1)
 class LEZeroException(Exception):
     def __init__(self, err_val):
         self.err_val = err_val

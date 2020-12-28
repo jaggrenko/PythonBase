@@ -1,15 +1,14 @@
 class Cell:
-    def __new__(cls, arg):
-        if isinstance(arg, int) and arg > 0:
-            return super().__new__(cls)
+    def __new__(cls, nucleus):
+        if isinstance(nucleus, int) and nucleus > 0:
+            instance = object.__new__(cls)
+            instance.nucleus = nucleus
+            return instance
         else:
-            return f'{None}\n'
-
-    def __init__(self, nucleus):
-        self.nucleus = nucleus
+            return None
 
     def __make_order(self):
-        head, tail = divmod(self.nucleus, 5)  # колчество ячеек кратно 5
+        head, tail = divmod(self.nucleus, 5)  # количество ячеек кратно 5
         return f'{"{}{}".format("*****", chr(10)) * head}{"*" * tail}\n'
 
     def __add__(self, other):

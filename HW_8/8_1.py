@@ -1,32 +1,35 @@
-from datetime import datetime as dt
-
-
 class Date:
-    def __new__(cls, arg):
-        try:
-            dt.strptime(arg, '%m-%d-%Y')
-        except ValueError:
-            print('Ошибка: введите дату в формате "ДД-ММ-ГГГГ"')
-            return None
-        else:
-            instance = object.__new__(cls)
-            instance.inp_date = arg
-            return instance
-
     @classmethod
-    def date_extractor(cls, inp_date):
+    def date_extractor(cls, dt_str):
         try:
-            __source = inp_date.split('-')
-        except Exception:
+            __source = dt_str.split('-')
+        except AttributeError:
+            print(f'Ошибка: дата должна быть задана в формате "ДД-ММ-ГГГГ"')
             return None
+        except Exception as err:
+            print(f'Ошибка: {err}')
         else:
             return __source
 
     @staticmethod
-    # DD-MM-YYYY
-    def date_validator():
-        print(Date.date_extractor())
+    def date_validator(dt_lst):
+        try:
+            dt_list = list(map(int, dt_lst))
+            if dt_list[0] in range(1, 32) and dt_list[1] in range(1, 13):
+                print(f'Дата введена корректно')
+                return True
+            else:
+                raise ValueError(f'Ошибка: введите 0 < число < 32; 0 < месяц < 13')
+        except ValueError as err:
+            print(err)
+            return False
+        except TypeError:
+            print(f'Ошибка: дата должна быть задана в формате "ДД-ММ-ГГГГ"')
+            return False
+        except Exception as err:
+            print(f'Ошибка: {err}')
+            return False        
 
 
-z = Date('03-03-2020')
-z.date_validator()
+z = Date.date_extractor('01-03-2020')
+y = Date.date_validator(z)

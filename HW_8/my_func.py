@@ -24,5 +24,5 @@ def str_conv_num(arg):
     return False, 0
 
 
-if __name__ == 'main':
+if __name__ == '__main__':
     str_conv_num('')

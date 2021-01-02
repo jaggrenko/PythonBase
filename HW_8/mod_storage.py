@@ -54,12 +54,8 @@ class Storage:
                         new_cnt = el[2] + cnt_to_mv
                         val[i] = (el[0], el[1], new_cnt, el[-1])
                         sh_obj[item_name] = val
-                        if item_in_stor:
-                            print(f'Техника [{item_type}:{item_name}] с заданными параметрами в количестве {cnt_to_mv} '
-                                  f'ед. перемещена: склад --> подразделения')
-                        else:
-                            print(f'Техника [{item_type}:{item_name}] с заданными параметрами в количестве {cnt_to_mv} '
-                                  f'ед. перемещена: подразделения --> склад')
+                        success_msg = f'Техника [{item_type}:{item_name}] с заданными параметрами в количестве {cnt_to_mv} ед. перемещена: '
+                        print(f'{success_msg}склад --> подразделения')if item_in_stor else print(f'{success_msg}подразделения --> склад')
 
     @classmethod
     def cnt_item(cls, item_type: str, item_name: str, item_in_stor: bool):

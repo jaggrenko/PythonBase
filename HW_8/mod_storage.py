@@ -6,14 +6,15 @@ class Storage:
     def add_item(cls, equip_dict):
         for key, val in equip_dict.items():
             with sh.open(f'{key}.md') as sh_obj:
-                if len(sh_obj) < 1:  # or not in obj keys()
-                    sh_obj[val[0]] = [val[1:]]
-                else:
+                if val[0] in sh_obj:  # or not in obj keys()
                     tmp_lst = sh_obj[val[0]][:]
                     tmp_lst.append(val[1:])
                     sh_obj[val[0]] = tmp_lst
+                else:
+                    sh_obj[val[0]] = [val[1:]]
         else:
             cls._optimizer(key, val[0])
+            print(f'Добавлено: {val[3]} ед. техники [{key}:{val[0]}] --> склад')
 
     @classmethod
     def rm_item(cls, item_type: str, item_name: str, item_is_new: bool, item_has_attr: bool, item_in_stor: bool,
@@ -29,10 +30,10 @@ class Storage:
                         sh_obj[item_name] = val
                         if item_in_stor:
                             print(f'Техника [{item_type}:{item_name}] с заданными параметрами в количестве {cnt_to_rm} '
-                                  f'ед. удалена со склада')
+                                  f'ед. удалена <-- склад')
                         else:
                             print(f'Техника [{item_type}:{item_name}] с заданными параметрами в количестве {cnt_to_rm} '
-                                  f'ед. удалена из подразделения')
+                                  f'ед. удалена <-- подразделения')
                         return True
                     else:
                         print(f'Введите значение не больше {el[2]}')
@@ -55,10 +56,10 @@ class Storage:
                         sh_obj[item_name] = val
                         if item_in_stor:
                             print(f'Техника [{item_type}:{item_name}] с заданными параметрами в количестве {cnt_to_mv} '
-                                  f'ед. перемещена со склада в подразделения')
+                                  f'ед. перемещена: склад --> подразделения')
                         else:
                             print(f'Техника [{item_type}:{item_name}] с заданными параметрами в количестве {cnt_to_mv} '
-                                  f'ед. перемещена из подразделения на склад')
+                                  f'ед. перемещена: подразделения --> склад')
 
     @classmethod
     def cnt_item(cls, item_type: str, item_name: str, item_in_stor: bool):
@@ -73,7 +74,7 @@ class Storage:
                     tmp_val_out += el[2]
             else:
                 print(f'Всего на складе [{item_type}:{item_name}]: {tmp_val_in} ед.') if item_in_stor \
-                    else print(f'Всего передано [{item_type}:{item_name}]: {tmp_val_out} ед.')
+                    else print(f'Передано подразделениям [{item_type}:{item_name}]: {tmp_val_out} ед.')
 
     @classmethod
     def _optimizer(cls, item_type: str, item_name: str):

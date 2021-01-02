@@ -1,4 +1,4 @@
-from my_stor import Storage
+from mod_storage import Storage
 
 
 class OfficeEquip:
@@ -11,7 +11,7 @@ class OfficeEquip:
         self.item_in_stor = item_in_stor
         self.res_dict = {}
 
-    def __call__(self, other):
+    def __call__(self, other=True):
         self.res_dict[self.item_type] = (self.item_name, self.item_is_new, other, self.item_quantity, self.item_in_stor)
         return self.res_dict
 
@@ -34,14 +34,8 @@ class Copier(OfficeEquip):
         self.is_riso = is_riso
 
 
-printer = Printer('Lexmark', True, False, 1)
-printer.is_cmyk = True
-
-s = Storage
-
-s.add_item(printer(True))
-s.mv_item('printer', 'lexmark', True, True, True, 2)
-s.cnt_item('printer', 'lexmark', True)
-s.cnt_item('printer', 'lexmark', False)
-
-#s.rm_item('printer', 'lexmark', True, True, True, 2)
+if __name__ == '__main__':
+    OfficeEquip('', '', False, 0)
+    Printer('', False, False, 0)
+    Scanner('', False, False, 0)
+    Copier('', False, False, 0)

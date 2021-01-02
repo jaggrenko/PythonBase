@@ -19,28 +19,28 @@ class Storage:
     @classmethod
     def rm_item(cls, item_type: str, item_name: str, item_is_new: bool, item_has_attr: bool, item_in_stor: bool,
                 cnt_to_rm: int):
-        with sh.open(f'{item_type}.md') as sh_obj:
-            val = sh_obj[item_name][:]
-            for i, el in enumerate(val):
-                match = el[0] == item_is_new and el[1] == item_has_attr and el[-1] == item_in_stor
-                if match and el[2] > 0:
-                    new_cnt = el[2] - cnt_to_rm
-                    if new_cnt >= 0:
-                        val[i] = (el[0], el[1], new_cnt, el[-1])
-                        sh_obj[item_name] = val
-                        if item_in_stor:
-                            print(f'Техника [{item_type}:{item_name}] с заданными параметрами в количестве {cnt_to_rm} '
-                                  f'ед. удалена <-- склад')
+        try:
+            with sh.open(f'{item_type}.md') as sh_obj:
+                val = sh_obj[item_name][:]
+                for i, el in enumerate(val):
+                    match: bool = el[0] == item_is_new and el[1] == item_has_attr and el[-1] == item_in_stor
+                    if match and el[2] > 0:
+                        new_cnt = el[2] - cnt_to_rm
+                        if 0 <= new_cnt:
+                            val[i] = (el[0], el[1], new_cnt, el[-1])
+                            sh_obj[item_name] = val
+                            success_msg = f'Техника [{item_type}:{item_name}] с заданными параметрами в количестве {cnt_to_rm} ед. удалена <-- '
+                            print(f'{success_msg}склад') if item_in_stor else print(f'{success_msg}подразделения')
+                            return True
                         else:
-                            print(f'Техника [{item_type}:{item_name}] с заданными параметрами в количестве {cnt_to_rm} '
-                                  f'ед. удалена <-- подразделения')
-                        return True
-                    else:
-                        print(f'Введите значение не больше {el[2]}')
+                            print(f'Введите значение не больше {el[2]}')
+                            return False
+                    elif match and el[2] <= 0:
+                        print(f'Техника [{item_type}:{item_name}] с заданными параметрами отсутствует')
                         return False
-                elif match and el[2] <= 0:
-                    print(f'Техника [{item_type}:{item_name}] с заданными параметрами отсутствует')
-                    return False
+        except KeyError:
+            print(f'Значение с ключом [{item_type}:{item_name}] не найдено')
+            return False
 
     @classmethod
     def mv_item(cls, item_type: str, item_name: str, item_is_new: bool, item_has_attr: bool, item_in_stor: bool,
@@ -63,18 +63,21 @@ class Storage:
 
     @classmethod
     def cnt_item(cls, item_type: str, item_name: str, item_in_stor: bool):
-        with sh.open(f'{item_type}.md') as sh_obj:
-            val = sh_obj[item_name][:]
-            tmp_val_in = 0
-            tmp_val_out = 0
-            for el in val:
-                if el[-1]:
-                    tmp_val_in += el[2]
+        try:
+            with sh.open(f'{item_type}.md') as sh_obj:
+                val = sh_obj[item_name][:]
+                tmp_val_in = 0
+                tmp_val_out = 0
+                for el in val:
+                    if el[-1]:
+                        tmp_val_in += el[2]
+                    else:
+                        tmp_val_out += el[2]
                 else:
-                    tmp_val_out += el[2]
-            else:
-                print(f'Всего на складе [{item_type}:{item_name}]: {tmp_val_in} ед.') if item_in_stor \
-                    else print(f'Передано подразделениям [{item_type}:{item_name}]: {tmp_val_out} ед.')
+                    print(f'Всего на складе [{item_type}:{item_name}]: {tmp_val_in} ед.') if item_in_stor \
+                        else print(f'Передано подразделениям [{item_type}:{item_name}]: {tmp_val_out} ед.')
+        except KeyError:
+            print(f'Значение с ключом [{item_type}:{item_name}] не найдено')
 
     @classmethod
     def _optimizer(cls, item_type: str, item_name: str):

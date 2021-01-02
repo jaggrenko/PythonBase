@@ -1,6 +1,3 @@
-from mod_storage import Storage
-
-
 class OfficeEquip:
     def __init__(self, item_type: str, item_name: str, item_is_new: bool, item_quantity: int,
                  item_in_stor: bool = True):
